@@ -11,11 +11,17 @@ import { ErrorHandler } from '../../app.error-handler';
 @Injectable()
 export class RestaurantService {
 
-    constructor(private http: Http) { }
+  constructor(private http: Http) { }
 
-    restaurants(): Observable<RestaurantModel[]> {
-        return this.http.get(`${APP_API}/restaurants`)
-        .map(response => response.json())
-        .catch(ErrorHandler.handleError)
-    }
+  restaurants(): Observable<RestaurantModel[]> {
+    return this.http.get(`${APP_API}/restaurants`)
+      .map(response => response.json())
+      .catch(ErrorHandler.handleError)
+  }
+
+  restaurantsById(id: string): Observable<RestaurantModel> {
+    return this.http.get(`${APP_API}/restaurants/${id}`)
+      .map(response => response.json())
+      .catch(ErrorHandler.handleError)
+  }
 }
